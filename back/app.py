@@ -2,8 +2,10 @@ import os
 import requests
 import http
 from flask import Flask, request, jsonify, make_response
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 app.config.from_object(os.environ['APP_SETTINGS'])
 
 def mapping_function(data):
@@ -29,7 +31,7 @@ def getFarmacias():
     '''
     try:
         payload = request.get_json()
-        comunaId = (payload.get('idComuna'))
+        comunaId = payload.get('idComuna')
         nombreLocal = payload.get('nombreLocal')
         #Validaciones basicas
         if not comunaId:

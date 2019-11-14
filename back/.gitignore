@@ -1,4 +1,5 @@
 venv/
+consorcio/
 
 *.pyc
 __pycache__/

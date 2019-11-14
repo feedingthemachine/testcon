@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-farmacias-be
+spec:
+  ports:
+  - name: farmacias-be
+    port: 5000
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    app: farmacias-be
+  type: LoadBalancer
+  loadBalancerIP: 34.74.21.164

@@ -12,15 +12,23 @@ def mapping_function(data):
     '''
     Funcion que crea el objeto respuesta
     '''
+    lat = data['local_lat']
+    longitud = data['local_lng']
+    if not lat:
+        lat = 0
+    if not longitud:
+        longitud = 0
+
     obj = {
             'name': data['local_nombre'],
             'address':data['local_direccion'],
             'telephone': data['local_telefono'],
             'position' :{
-            'lat': data['local_lat'],
-            'lng': data['local_lng']
+            'lat': float(lat),
+            'lng': float(longitud)
             }
-          }
+        }
+
     return obj
 
 @app.route('/obtenerFarmaciasDeTurno', methods=['POST'])
@@ -33,6 +41,7 @@ def getFarmacias():
         payload = request.get_json()
         comunaId = payload.get('idComuna')
         nombreLocal = payload.get('nombreLocal')
+      
         #Validaciones basicas
         if not comunaId:
             return make_response(jsonify(message='Bad Request'), 400)
@@ -55,8 +64,8 @@ def getFarmacias():
         #Utilizando los filter/map y funciones lambda agilizamos los procesos de filtro, por conceptos de orden y legibilidad prefiero utilizar por separado
 
         return jsonify(farmaciasMap), 200
-    except: 
-        return jsonify('nada'), 200
+    except Exception as e:
+        return(str(e))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')

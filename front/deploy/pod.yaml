@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cnt-farmacias-fe
+spec:
+  selector:
+    matchLabels:
+      app: farmacias-fe
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: farmacias-fe
+    spec:
+      containers:
+      - name: farmacias-fe
+        image: us.gcr.io/sandbox-1573607247877/fe-buscar-farmacias:v1.0.0
+        env:
+        - name: REACT_APP_BE_ENDPOINT
+          value: http://34.74.21.164:5000/obtenerFarmaciasDeTurno
+        - name: REACT_APP_DO_MOCK
+          value: '0'
+        ports:
+        - containerPort: 3000

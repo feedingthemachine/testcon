@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-farmacias-fe
+spec:
+  ports:
+  - name: farmacias-fe
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 3000
+  selector:
+    app: farmacias-fe
+  type: LoadBalancer
+  loadBalancerIP: 34.74.21.164

@@ -31,7 +31,7 @@ def getFarmacias():
     '''
     try:
         payload = request.get_json()
-        comunaId = (payload.get('idComuna'))
+        comunaId = payload.get('idComuna')
         nombreLocal = payload.get('nombreLocal')
         #Validaciones basicas
         if not comunaId:
